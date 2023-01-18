@@ -7,7 +7,7 @@
     <hook type="cdentry">
         <identifier>cd_greenit</identifier>
         <translation>80700</translation>
-        <category>admin</category>
+        <category>other</category>
         <available>greenit</available>
     </hook>
 </hookstore>

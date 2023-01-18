@@ -18,13 +18,11 @@ $DATA_MAP{greenit} = {
    multi => 1,
    auto => 1,
    delOnReplace => 1,
-   sortBy => 'CPU_USAGE',
+   sortBy => 'CPU',
    writeDiff => 0,
    cache => 0,
    fields => {
-       CPU_USAGE => {},
-       MEMORY_USAGE => {},
-       STATE => {},
+       CPU => {},
    }
 };
 1;

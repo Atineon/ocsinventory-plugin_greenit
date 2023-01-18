@@ -42,9 +42,7 @@ $tab_options['table_name'] = $table_name;
 
 echo open_form($form_name);
 $list_fields = array(
-    'CPU' => 'CPU_USAGE',
-    'MEMORY' => 'MEMORY_USAGE',
-    'Power Consumption' => 'STATE',
+    'CPU' => 'CPU',
 );
 
 // columns to include at any time and default columns
