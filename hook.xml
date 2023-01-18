@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hookstore>
+    <hook type="lang">
+        <value>en_GB</value>
+        <value>fr_FR</value>
+    </hook>
+    <hook type="cdentry">
+        <identifier>cd_greenit</identifier>
+        <translation>80700</translation>
+        <category>admin</category>
+        <available>greenit</available>
+    </hook>
+</hookstore>

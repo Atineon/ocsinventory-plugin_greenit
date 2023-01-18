@@ -1,0 +1,13 @@
+{
+    "displayName" : "Green IT",
+    "author" : ["Antoine ROBIN"],
+    "contributor" : [],
+    "supportedAgent" : ["Windows"],
+    "version" : "1.0",
+    "licence" : "GPLv2",
+    "description" : 
+        {
+            "en" : "Gather power consumption information",
+            "fr" : "Rassemble des informations de consomation électique"
+        }
+    }
