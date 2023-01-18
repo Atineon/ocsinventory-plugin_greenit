@@ -24,7 +24,7 @@ function GenerateXML {
 Try {
     $resultXML = ''
     write-verbose "[INFO] Gathering consumption information"
-    $command = Get-WmiObject -Namespace root\OpenHardwareMonitor -Class Sensor -Filter "Name='CPU Total'"| Select Value
+    $command = Get-WmiObject -Namespace root\OpenHardwareMonitor -Class Sensor -Filter "Name='CPU Package' and SensorType='Power'"| Select Value
     foreach($setting in $command)
     {
         
