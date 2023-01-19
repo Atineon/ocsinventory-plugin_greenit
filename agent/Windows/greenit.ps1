@@ -49,7 +49,7 @@ Try {
     #Consumption Calcul
     $cpuConsumption = ($cpu.Value*60)/1000
     $costPerDay = $cpuConsumption*24*$kWhPrice
-    $costPerMonth = $cpuConsumption*730**$kWhPrice
+    $costPerMonth = $cpuConsumption*730*$kWhPrice
     $costPerYear = $cpuConsumption*8760*$kWhPrice
 
     $resultXML = $(GenerateXML $($cpuConsumption) $($costPerDay) $($costPerMonth) $($costPerYear))
