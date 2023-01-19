@@ -23,6 +23,7 @@ $DATA_MAP{greenit} = {
    cache => 0,
    fields => {
        CPU => {},
+       COST => {},
    }
 };
 1;

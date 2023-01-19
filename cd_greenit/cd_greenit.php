@@ -43,6 +43,7 @@ $tab_options['table_name'] = $table_name;
 echo open_form($form_name);
 $list_fields = array(
     'CPU' => 'CPU',
+    'COST' => 'COST',
 );
 
 // columns to include at any time and default columns

@@ -17,7 +17,8 @@ function extension_install_greenit()
         "CREATE TABLE IF NOT EXISTS `greenit` (
         `ID` INTEGER NOT NULL AUTO_INCREMENT,
         `HARDWARE_ID` INTEGER NOT NULL,
-        `CPU` INTEGER DEFAULT NULL,
+        `CPU` varchar(255) DEFAULT NULL,
+        `COST` varchar(255) DEFAULT NULL,
         PRIMARY KEY (ID,HARDWARE_ID)) ENGINE=INNODB;"
     );
 }
