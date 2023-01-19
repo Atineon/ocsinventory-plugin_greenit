@@ -19,8 +19,8 @@ $cpu = Get-WmiObject -Namespace root\OpenHardwareMonitor -Class Sensor -Filter "
 function GenerateXML {
     param (
         [Parameter(Mandatory=$True)][string]$cpuConsumption,
-        [Parameter(Mandatory=$True)][string]$costPerDay
-        [Parameter(Mandatory=$True)][string]$costPerMonth
+        [Parameter(Mandatory=$True)][string]$costPerDay,
+        [Parameter(Mandatory=$True)][string]$costPerMonth,
         [Parameter(Mandatory=$True)][string]$costPerYear
     )
 
