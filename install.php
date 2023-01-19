@@ -18,7 +18,9 @@ function extension_install_greenit()
         `ID` INTEGER NOT NULL AUTO_INCREMENT,
         `HARDWARE_ID` INTEGER NOT NULL,
         `CPU` varchar(255) DEFAULT NULL,
-        `COST` varchar(255) DEFAULT NULL,
+        `COST_PER_DAY` varchar(255) DEFAULT NULL,
+        `COST_PER_MONTH` varchar(255) DEFAULT NULL,
+        `COST_PER_YEAR` varchar(255) DEFAULT NULL,
         PRIMARY KEY (ID,HARDWARE_ID)) ENGINE=INNODB;"
     );
 }
