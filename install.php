@@ -17,7 +17,7 @@ function extension_install_greenit()
         "CREATE TABLE IF NOT EXISTS `greenit` (
         `ID` INTEGER NOT NULL AUTO_INCREMENT,
         `HARDWARE_ID` INTEGER NOT NULL,
-        `CPU` varchar(255) DEFAULT NULL,
+        `CPU_CONSUMPTION` varchar(255) DEFAULT NULL,
         `COST_PER_DAY` varchar(255) DEFAULT NULL,
         `COST_PER_MONTH` varchar(255) DEFAULT NULL,
         `COST_PER_YEAR` varchar(255) DEFAULT NULL,

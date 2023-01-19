@@ -42,7 +42,7 @@ $tab_options['table_name'] = $table_name;
 
 echo open_form($form_name);
 $list_fields = array(
-    'CPU' => 'CPU',
+    'CPU_CONSUMPTION' => 'CPU_CONSUMPTION',
     'COST_PER_DAY' => 'COST_PER_DAY',
     'COST_PER_MONTH' => 'COST_PER_MONTH',
     'COST_PER_YEAR' => 'COST_PER_YEAR',
