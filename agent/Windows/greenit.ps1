@@ -6,7 +6,7 @@ Param (
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 
-#kWh cost
+#kWh costPerDay
 $kWhPrice = 0.1752
 
 #List of get commands
@@ -18,16 +18,22 @@ $cpu = Get-WmiObject -Namespace root\OpenHardwareMonitor -Class Sensor -Filter "
 ###
 function GenerateXML {
     param (
-        [Parameter(Mandatory=$True)][string]$cpu,
-        [Parameter(Mandatory=$True)][string]$cost
+        [Parameter(Mandatory=$True)][string]$cpuConsumption,
+        [Parameter(Mandatory=$True)][string]$costPerDay
+        [Parameter(Mandatory=$True)][string]$costPerMonth
+        [Parameter(Mandatory=$True)][string]$costPerYear
     )
 
-    $cpu = $($($cpu.subString(0, [System.Math]::Min(255, $cpu.Length))))
-    $cost = $($($cost.subString(0, [System.Math]::Min(255, $cost.Length))))
+    $cpuConsumption = $($($cpuConsumption.subString(0, [System.Math]::Min(255, $cpuConsumption.Length))))
+    $costPerDay = $($($costPerDay.subString(0, [System.Math]::Min(255, $costPerDay.Length))))
+    $costPerMonth = $($($costPerMonth.subString(0, [System.Math]::Min(255, $costPerMonth.Length))))
+    $costPerYear = $($($costPerYear.subString(0, [System.Math]::Min(255, $costPerYear.Length))))
 
     $generateXML += "<GREENIT>`n"
-    $generateXML += "<CPU>"+ $cpu +" W</CPU>`n"
-    $generateXML += "<COST>"+ $cost +" €</COST>`n"
+    $generateXML += "<CPU_CONSUMPTION>"+ $cpuConsumption +" W</CPU_CONSUMPTION>`n"
+    $generateXML += "<COST_PER_DAY>"+ $costPerDay +" €/day</COST_PER_DAY>`n"
+    $generateXML += "<COST_PER_MONTH>"+ $costPerMonth +" €/month</COST_PER_MONTH>`n"
+    $generateXML += "<COST_PER_YEAR>"+ $costPerYear +" €/year</COST_PER_YEAR>`n"
     $generateXML += "</GREENIT>`n"
     return $generateXML
 }
@@ -41,10 +47,12 @@ Try {
     write-verbose "[INFO] Gathering consumption information"
     
     #Consumption Calcul
-    $cpu = ($cpu*60)/1000
-    $cost = $cpu*$kWhPrice
+    $cpuConsumption = ($cpu.Value*60)
+    $costPerDay = $cpuConsumption*24*$kWhPrice
+    $costPerMonth = $cpuConsumption*730**$kWhPrice
+    $costPerYear = $cpuConsumption*8760*$kWhPrice
 
-    $resultXML = $(GenerateXML $($cpu) $($cost))
+    $resultXML = $(GenerateXML $($cpuConsumption) $($costPerDay) $($costPerMonth) $($costPerYear))
 }
 Catch {
     write-verbose $Error[0]
