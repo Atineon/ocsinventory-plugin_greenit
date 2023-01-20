@@ -42,10 +42,10 @@ $tab_options['table_name'] = $table_name;
 
 echo open_form($form_name);
 $list_fields = array(
-    'CPU_CONSUMPTION' => 'CPU_CONSUMPTION',
-    'COST_PER_DAY' => 'COST_PER_DAY',
-    'COST_PER_MONTH' => 'COST_PER_MONTH',
-    'COST_PER_YEAR' => 'COST_PER_YEAR',
+    'CPU Consumption' => 'CPU_CONSUMPTION',
+    'Cost / day' => 'COST_PER_DAY',
+    'Cost / month' => 'COST_PER_MONTH',
+    'Cost / year' => 'COST_PER_YEAR',
 );
 
 // columns to include at any time and default columns

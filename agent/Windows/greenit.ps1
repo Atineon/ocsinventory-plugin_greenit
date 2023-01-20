@@ -3,7 +3,7 @@ Param (
 )
 
 #UTF8 Encoding
-$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8mb4'
 
 
 #kWh costPerDay
