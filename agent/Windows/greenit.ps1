@@ -30,10 +30,10 @@ function GenerateXML {
     $costPerYear = $($($costPerYear.subString(0, [System.Math]::Min(255, $costPerYear.Length))))
 
     $generateXML += "<GREENIT>`n"
-    $generateXML += "<CPU_CONSUMPTION>"+ $cpuConsumption +" kW/h</CPU_CONSUMPTION>`n"
-    $generateXML += "<COST_PER_DAY>"+ $costPerDay +" €/day</COST_PER_DAY>`n"
-    $generateXML += "<COST_PER_MONTH>"+ $costPerMonth +" €/month</COST_PER_MONTH>`n"
-    $generateXML += "<COST_PER_YEAR>"+ $costPerYear +" €/year</COST_PER_YEAR>`n"
+    $generateXML += "<CPU_CONSUMPTION>≈ "+ $cpuConsumption +" kW/h</CPU_CONSUMPTION>`n"
+    $generateXML += "<COST_PER_DAY>≈ "+ $costPerDay +" €/day</COST_PER_DAY>`n"
+    $generateXML += "<COST_PER_MONTH>≈ "+ $costPerMonth +" €/month</COST_PER_MONTH>`n"
+    $generateXML += "<COST_PER_YEAR>≈ "+ $costPerYear +" €/year</COST_PER_YEAR>`n"
     $generateXML += "</GREENIT>`n"
     return $generateXML
 }
@@ -47,10 +47,10 @@ Try {
     write-verbose "[INFO] Gathering consumption information"
     
     #Consumption Calcul
-    $cpuConsumption = ($cpu.Value*60)/1000
-    $costPerDay = $cpuConsumption*24*$kWhPrice
-    $costPerMonth = $cpuConsumption*730*$kWhPrice
-    $costPerYear = $cpuConsumption*8760*$kWhPrice
+    $cpuConsumption = [Math]::Round(($cpu.Value*60)/1000,3)
+    $costPerDay = [Math]::Round($cpuConsumption*24*$kWhPrice,3)
+    $costPerMonth = [Math]::Round($cpuConsumption*730*$kWhPrice,3)
+    $costPerYear = [Math]::Round($cpuConsumption*8760*$kWhPrice,3)
 
     $resultXML = $(GenerateXML $($cpuConsumption) $($costPerDay) $($costPerMonth) $($costPerYear))
 }
