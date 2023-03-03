@@ -57,7 +57,6 @@ Try {
     {
         foreach($line in $file)
         {
-            $line = $line.Replace("ÂµW", "µW")
             if($line -match $regex)
             {
                 $element = [PSCustomobject]@{
