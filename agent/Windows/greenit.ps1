@@ -5,67 +5,90 @@ Param (
 #UTF8 Encoding
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-
-#kWh costPerDay
-$kWhPrice = 0.1752
-
-#List of get commands
-$cpu = Get-WmiObject -Namespace root\OpenHardwareMonitor -Class Sensor -Filter "Name='CPU Package' and SensorType='Power'"| Select Value
-
-
 ###
 # Functions
 ###
-function GenerateXML {
+function GenerateXML
+{
     param (
-        [Parameter(Mandatory=$True)][string]$cpuConsumption,
-        [Parameter(Mandatory=$True)][string]$costPerDay,
-        [Parameter(Mandatory=$True)][string]$costPerMonth,
-        [Parameter(Mandatory=$True)][string]$costPerYear
+        [Parameter(Mandatory=$True)][PSCustomobject]$data
     )
 
-    $cpuConsumption = $($($cpuConsumption.subString(0, [System.Math]::Min(255, $cpuConsumption.Length))))
-    $costPerDay = $($($costPerDay.subString(0, [System.Math]::Min(255, $costPerDay.Length))))
-    $costPerMonth = $($($costPerMonth.subString(0, [System.Math]::Min(255, $costPerMonth.Length))))
-    $costPerYear = $($($costPerYear.subString(0, [System.Math]::Min(255, $costPerYear.Length))))
+    $counter = 0
 
-    $generateXML += "<GREENIT>`n"
-    $generateXML += "<CPU_CONSUMPTION>≈ "+ $cpuConsumption +" kW/h</CPU_CONSUMPTION>`n"
-    $generateXML += "<COST_PER_DAY>≈ "+ $costPerDay +" €/day</COST_PER_DAY>`n"
-    $generateXML += "<COST_PER_MONTH>≈ "+ $costPerMonth +" €/month</COST_PER_MONTH>`n"
-    $generateXML += "<COST_PER_YEAR>≈ "+ $costPerYear +" €/year</COST_PER_YEAR>`n"
-    $generateXML += "</GREENIT>`n"
+    foreach($sensor in $data)
+    {
+        $generateXML += "<GREENIT>`n"
+        $generateXML += "<DATETIME>"+ $sensor.DateTime + "</DATETIME>`n"
+        $generateXML += "<LIBRARY>"+ $sensor.Library + "</LIBRARY>`n"
+        $generateXML += "<SENSOR>"+ $sensor.sensor + "</SENSOR>`n"
+        $generateXML += "<VALUE>"+ $sensor.Value + "</VALUE>`n"
+        $generateXML += "</GREENIT>`n"
+    }
+
     return $generateXML
 }
 
 ###
 # Core
 ###
+
+#Regular expression
+$regex = "((?<Date>(?<Date_Day>[0-9]+)\/(?<Date_Month>[0-9]+)\/(?<Date_Year>[0-9]+)) (?<Time>(?<Time_Hour>[0-9]+):(?<Time_Minute>[0-9]+):(?<Time_Second>[0-9]+)): (?<Library>[^:]+): (?<sensor>[^:]+): (?<Value>[0-9.]+ W))"
+
+#Reset variables
+$resultXML = ""
+$data = @()
+$element = [PSCustomObject]@{}
+
+write-verbose "[INFO] Gathering consumption information"
+
 Try {
-    $resultXML = ''
-
-    write-verbose "[INFO] Gathering consumption information"
-    
-    #Consumption Calcul
-    $cpuConsumption = [Math]::Round(($cpu.Value*60)/1000,3)
-    $costPerDay = [Math]::Round($cpuConsumption*24*$kWhPrice,3)
-    $costPerMonth = [Math]::Round($cpuConsumption*730*$kWhPrice,3)
-    $costPerYear = [Math]::Round($cpuConsumption*8760*$kWhPrice,3)
-
-    $resultXML = $(GenerateXML $($cpuConsumption) $($costPerDay) $($costPerMonth) $($costPerYear))
+    for($i = 0; $i -lt 10; $i++)
+    {
+        $file = Get-Content "C:\ProgramData\OCS Inventory NG\Agent\GreenIT.log"
+        if($file)
+        {
+            break;
+        }
+        Start-Sleep(1)
+    }
+    if($file)
+    {
+        foreach($line in $file)
+        {
+            if($line -match $regex)
+            {
+                $element = [PSCustomobject]@{
+                    DateTime = $Matches.Date_Year + "-" + $Matches.Date_Month + "-" + $Matches.Date_Day + " " + $Matches.Time
+                    Library = $Matches.Library
+                    sensor = $Matches.sensor
+                    Value = $Matches.Value
+                }
+                $data += $element
+            }
+        }
+        $resultXML = $(GenerateXML $($data))
+    }
+    else
+    {
+        write-verbose "[ERROR] Get-Content Timed out"
+    }
 }
 Catch {
     write-verbose $Error[0]
 }
 
 write-verbose "[INFO] Sending report..."
+
 if($resultXML)
 {
-    [Console]::WriteLine($resultXML)
+    echo $resultXML
     write-verbose "[INFO] Done sending report"
-    write-verbose "[INFO] Exiting"
 }
 else
 {
     write-verbose "[ERROR] Something went wrong with the report sending. Exiting"
 }
+
+write-verbose "[INFO] Exiting"
