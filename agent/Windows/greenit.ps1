@@ -34,7 +34,7 @@ function GenerateXML
 ###
 
 #Regular expression
-$regex = "((?<Date>(?<Date_Day>[0-9]+)\/(?<Date_Month>[0-9]+)\/(?<Date_Year>[0-9]+)) (?<Time>(?<Time_Hour>[0-9]+):(?<Time_Minute>[0-9]+):(?<Time_Second>[0-9]+)): (?<Library>[^:]+): (?<sensor>[^:]+): (?<Value>[0-9.]+ W))"
+$regex = "((?<Date>(?<Date_Day>[0-9]+)\/(?<Date_Month>[0-9]+)\/(?<Date_Year>[0-9]+)) (?<Time>(?<Time_Hour>[0-9]+):(?<Time_Minute>[0-9]+):(?<Time_Second>[0-9]+)): (?<Library>[^:]+): (?<sensor>[^:]+): (?<Value>[0-9.,]+ W))"
 
 #Reset variables
 $resultXML = ""
