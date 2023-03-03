@@ -18,14 +18,14 @@ $DATA_MAP{greenit} = {
    multi => 1,
    auto => 1,
    delOnReplace => 1,
-   sortBy => 'CPU_CONSUMPTION',
+   sortBy => 'DATETIME',
    writeDiff => 0,
    cache => 0,
    fields => {
-       CPU_CONSUMPTION => {},
-       COST_PER_DAY => {},
-       COST_PER_MONTH => {},
-       COST_PER_YEAR => {},
+       DATETIME => {},
+       LIBRARY => {},
+       SENSOR => {},
+       VALUE => {},
    }
 };
 1;
