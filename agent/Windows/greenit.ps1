@@ -16,13 +16,13 @@ function GenerateXML
 
     $counter = 0
 
-    foreach($sensor in $data)
+    foreach($PROCESS in $data)
     {
         $generateXML += "<GREENIT>`n"
-        $generateXML += "<DATETIME>"+ $sensor.DateTime + "</DATETIME>`n"
-        $generateXML += "<LIBRARY>"+ $sensor.Library + "</LIBRARY>`n"
-        $generateXML += "<SENSOR>"+ $sensor.sensor + "</SENSOR>`n"
-        $generateXML += "<VALUE>"+ $sensor.Value + "</VALUE>`n"
+        $generateXML += "<DATETIME>"+ $PROCESS.DateTime + "</DATETIME>`n"
+        $generateXML += "<LIBRARY>"+ $PROCESS.Library + "</LIBRARY>`n"
+        $generateXML += "<PROCESS>"+ $PROCESS.Process + "</PROCESS>`n"
+        $generateXML += "<VALUE>"+ $PROCESS.Value + "</VALUE>`n"
         $generateXML += "</GREENIT>`n"
     }
 
@@ -34,7 +34,7 @@ function GenerateXML
 ###
 
 #Regular expression
-$regex = "(?<Date>(?<Date_Day>[0-9]+)\/(?<Date_Month>[0-9]+)\/(?<Date_Year>[0-9]+)) (?<Time>(?<Time_Hour>[0-9]+):(?<Time_Minute>[0-9]+):(?<Time_Second>[0-9]+)): (?<Library>[\s\S]+?): (?<sensor>[_\s\S]+?): (?<Value>[0-9.,]+ W)"
+$regex = "(?<Date>(?<Date_Day>[0-9]+)\/(?<Date_Month>[0-9]+)\/(?<Date_Year>[0-9]+)) (?<Time>(?<Time_Hour>[0-9]+):(?<Time_Minute>[0-9]+):(?<Time_Second>[0-9]+)): (?<Library>[\s\S]+?): (?<Process>[_\s\S]+?): (?<Value>[0-9.,]+ W)"
 
 #Reset variables
 $resultXML = ""
@@ -62,7 +62,7 @@ Try {
                 $element = [PSCustomobject]@{
                     DateTime = $Matches.Date_Year + "-" + $Matches.Date_Month + "-" + $Matches.Date_Day + " " + $Matches.Time
                     Library = $Matches.Library
-                    sensor = $Matches.sensor
+                    Process = $Matches.Process
                     Value = $Matches.Value
                 }
                 $data += $element

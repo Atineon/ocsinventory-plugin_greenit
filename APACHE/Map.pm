@@ -24,7 +24,7 @@ $DATA_MAP{greenit} = {
    fields => {
        DATETIME => {},
        LIBRARY => {},
-       SENSOR => {},
+       PROCESS => {},
        VALUE => {},
    }
 };

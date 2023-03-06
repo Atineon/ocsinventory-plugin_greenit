@@ -44,7 +44,7 @@ echo open_form($form_name);
 $list_fields = array(
     'DATETIME' => 'DATETIME',
     'LIBRARY' => 'LIBRARY',
-    'SENSOR' => 'SENSOR',
+    'PROCESS' => 'PROCESS',
     'VALUE' => 'VALUE',
 );
 

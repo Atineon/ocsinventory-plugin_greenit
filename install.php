@@ -19,7 +19,7 @@ function extension_install_greenit()
         `HARDWARE_ID` INTEGER NOT NULL,
         `DATETIME` DATETIME NOT NULL,
         `LIBRARY` VARCHAR(255) NOT NULL,
-        `SENSOR` VARCHAR(255) NOT NULL,
+        `PROCESS` VARCHAR(255) NOT NULL,
         `VALUE` VARCHAR(255) NOT NULL,
         PRIMARY KEY (ID,HARDWARE_ID)) ENGINE=INNODB;"
     );
