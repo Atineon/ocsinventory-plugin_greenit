@@ -19,7 +19,7 @@ function extension_install_greenit()
         `HARDWARE_ID` INTEGER NOT NULL,
         `DATE` DATE NOT NULL,
         `CONSUMPTION` VARCHAR(255) NOT NULL,
-        `UPTIME` INTEGER NOT NULL,
+        `UPTIME` VARCHAR(255) NOT NULL,
         PRIMARY KEY (ID,HARDWARE_ID)) ENGINE=INNODB;"
     );
 }
