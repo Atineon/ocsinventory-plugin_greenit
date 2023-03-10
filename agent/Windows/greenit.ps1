@@ -8,7 +8,7 @@ if($null -eq $dataContent) {
 } else {
     $xml = ""
 
-    $regex =  "`"(?<DATE>[0-9]+-[0-9]+-[0-9]+)`": {`"CONSUMPTION`":(?<CONSUMPTION>[0-9,.]+),`"UPTIME`":(?<UPTIME>[0-9]+)},"
+    $regex =  "`"(?<DATE>[0-9]+-[0-9]+-[0-9]+)`": {`"CONSUMPTION`":`"(?<CONSUMPTION>[0-9,.]+)`",`"UPTIME`":`"(?<UPTIME>[0-9]+)`"},"
     foreach($data in $dataContent)
     {
         if($data -match $regex)
