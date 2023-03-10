@@ -18,7 +18,7 @@ function extension_install_greenit()
         `ID` INTEGER NOT NULL AUTO_INCREMENT,
         `HARDWARE_ID` INTEGER NOT NULL,
         `DATE` DATE NOT NULL,
-        `CONSUMPTION` FLOAT NOT NULL,
+        `CONSUMPTION` VARCHAR(255) NOT NULL,
         `UPTIME` INTEGER NOT NULL,
         PRIMARY KEY (ID,HARDWARE_ID)) ENGINE=INNODB;"
     );
