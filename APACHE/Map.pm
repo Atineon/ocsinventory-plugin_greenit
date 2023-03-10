@@ -17,15 +17,14 @@ $DATA_MAP{greenit} = {
    mask => 0,
    multi => 1,
    auto => 1,
-   delOnReplace => 1,
-   sortBy => 'DATETIME',
+   delOnReplace => 0,
+   sortBy => 'DATE',
    writeDiff => 0,
    cache => 0,
    fields => {
-       DATETIME => {},
-       LIBRARY => {},
-       PROCESS => {},
-       VALUE => {},
+       DATE => {},
+       CONSUMPTION => {},
+       UPTIME => {},
    }
 };
 1;

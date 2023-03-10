@@ -42,10 +42,9 @@ $tab_options['table_name'] = $table_name;
 
 echo open_form($form_name);
 $list_fields = array(
-    'DATETIME' => 'DATETIME',
-    'LIBRARY' => 'LIBRARY',
-    'PROCESS' => 'PROCESS',
-    'VALUE' => 'VALUE',
+    'DATE' => 'DATE',
+    'CONSUMPTION' => 'CONSUMPTION',
+    'UPTIME' => 'UPTIME',
 );
 
 // columns to include at any time and default columns
