@@ -8,14 +8,21 @@ if($null -eq $dataContent) {
 } else {
     $xml = ""
 
-    $regex =  "`"(?<DATE>[0-9]+-[0-9]+-[0-9]+)`": {`"CONSUMPTION`":`"(?<CONSUMPTION>[0-9,.]+)`",`"UPTIME`":`"(?<UPTIME>[0-9]+)`"},"
+    $regex =  "`"(?<DATE>[0-9]+-[0-9]+-[0-9]+)`": {`"CONSUMPTION`":`"(?<CONSUMPTION>[\s\S]+?)`",`"UPTIME`":`"(?<UPTIME>[0-9]+)`"},"
     foreach($data in $dataContent)
     {
         if($data -match $regex)
         {
             $xml += "<GREENIT>`n"
             $xml += "<DATE>" + $Matches.DATE + "</DATE>`n"
-            $xml += "<CONSUMPTION>" + $Matches.CONSUMPTION + " W/h</CONSUMPTION>`n"
+            if($Matches.CONSUMPTION == "VM detected")
+            {
+                $xml += "<CONSUMPTION>" + $Matches.CONSUMPTION + "</CONSUMPTION>`n"
+            }
+            else
+            {
+                $xml += "<CONSUMPTION>" + $Matches.CONSUMPTION + " W/h</CONSUMPTION>`n"
+            }
             $xml += "<UPTIME>" + $Matches.UPTIME + " s</UPTIME>`n"
             $xml += "</GREENIT>`n"
         }
