@@ -15,7 +15,7 @@ if($null -eq $dataContent) {
         {
             $xml += "<GREENIT>`n"
             $xml += "<DATE>" + $Matches.DATE + "</DATE>`n"
-            if($Matches.CONSUMPTION == "VM detected")
+            if($Matches.CONSUMPTION -eq "VM detected")
             {
                 $xml += "<CONSUMPTION>" + $Matches.CONSUMPTION + "</CONSUMPTION>`n"
             }
